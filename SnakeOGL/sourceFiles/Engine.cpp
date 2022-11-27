@@ -2,14 +2,13 @@
 
 #include "Engine.h"
 
-// Память на последнуюю активированную текстуру
+// РџР°РјСЏС‚СЊ РЅР° РїРѕСЃР»РµРґРЅСѓСЋСЋ Р°РєС‚РёРІРёСЂРѕРІР°РЅРЅСѓСЋ С‚РµРєСЃС‚СѓСЂСѓ
 GLuint lasttex=-1 ;
 
 void loadTexture(GLuint * tex, const char * filename) {
-	// Загрузка картинки
+	// Р—Р°РіСЂСѓР·РєР° РєР°СЂС‚РёРЅРєРё
 	AUX_RGBImageRec *data = auxDIBImageLoadA(filename);
 
-	// Создание текстуры
 	glGenTextures(1, tex);
 	glBindTexture(GL_TEXTURE_2D, *tex);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
@@ -20,7 +19,7 @@ void loadTexture(GLuint * tex, const char * filename) {
 }
 
 void renderSprite(const Sprite & spr, int x, int y) {
-	// Переключаем текстуру только при необходимости
+	// РџРµСЂРµРєР»СЋС‡Р°РµРј С‚РµРєСЃС‚СѓСЂСѓ С‚РѕР»СЊРєРѕ РїСЂРё РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё
 	if ((lasttex==-1)||(lasttex!=spr.texcode)) {
 		glBindTexture(GL_TEXTURE_2D, spr.texcode);      
 		lasttex = spr.texcode ;
@@ -74,7 +73,7 @@ void renderSpriteRotated(const Sprite & spr, int x, int y, SpriteDir dir) {
 void renderDigits(int num, Sprite * digits, int x, int y) {
 	char str[32] ;
 	sprintf(str,"%d",num) ;
-	// Просто рендерим спрайты цифр со сдвигом
+	// РџСЂРѕСЃС‚Рѕ СЂРµРЅРґРµСЂРёРј СЃРїСЂР°Р№С‚С‹ С†РёС„СЂ СЃРѕ СЃРґРІРёРіРѕРј
 	for (int i=0; i<strlen(str); i++) {
 		renderSprite(digits[str[i]-'0'],x,y) ;
 		x+=digits[0].width ;

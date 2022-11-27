@@ -3,7 +3,7 @@
 
 #include <time.h>
 
-// Обрезка переноса строки
+// РћР±СЂРµР·РєР° РїРµСЂРµРЅРѕСЃР° СЃС‚СЂРѕРєРё
 void strip(char * str) {
         while ((str[strlen(str)-1]==13)||(str[strlen(str)-1]==10))
             str[strlen(str)-1]=0 ;
@@ -44,7 +44,7 @@ void Snake::updateXYCustomDir(Direction cdir, int * x, int * y) const {
 
 Snake::Snake(const char * mapfile) {  
   
-  // Читаем карту
+  // Р§РёС‚Р°РµРј РєР°СЂС‚Сѓ
   char line[256] ;
   FILE * f = fopen(mapfile,"r") ;
   fgets(line,255,f) ; strip(line) ; width = atoi(line) ;
@@ -62,7 +62,7 @@ Snake::Snake(const char * mapfile) {
 
   srand(time(NULL)) ;
 
-  // Заливаем змейку в произвольное место
+  // Р—Р°Р»РёРІР°РµРј Р·РјРµР№РєСѓ РІ РїСЂРѕРёР·РІРѕР»СЊРЅРѕРµ РјРµСЃС‚Рѕ
   bool completed = false ;
   while (!completed) {
 	  int x = rand()%width ;
@@ -92,7 +92,7 @@ Snake::Snake(const char * mapfile) {
 	  }	  	  
   }
   
-  // Ставим кроликов
+  // РЎС‚Р°РІРёРј РєСЂРѕР»РёРєРѕРІ
   for (int i=0; i<rabcount; i++) {
 	  while (true) {
 		  int x = rand() % width ;
@@ -158,33 +158,33 @@ void Snake::nextStep(int dtmsec) {
     
   if (stopped) return ;
 
-  // Обновляем голову змеи
+  // РћР±РЅРѕРІР»СЏРµРј РіРѕР»РѕРІСѓ Р·РјРµРё
   Point2 head = body[body.size()-1] ;
   updateXY(&head.x,&head.y) ;
     
-  // Проверка конца игры
+  // РџСЂРѕРІРµСЂРєР° РєРѕРЅС†Р° РёРіСЂС‹
   if (isBodyAt(head.x,head.y)) gameover=true ;
   if (gameover) return ;
 
   if (isWallAt(head.x,head.y)) stopped=true ;
   if (stopped) return ;
 
-  // Ползем вперед
+  // РџРѕР»Р·РµРј РІРїРµСЂРµРґ
   body.push_back(head) ;
   
-  // Если не надо расти, то убираем хвост, иначе растем
+  // Р•СЃР»Рё РЅРµ РЅР°РґРѕ СЂР°СЃС‚Рё, С‚Рѕ СѓР±РёСЂР°РµРј С…РІРѕСЃС‚, РёРЅР°С‡Рµ СЂР°СЃС‚РµРј
   if (grow==0)
     body.erase(body.begin()) ;
   else
     grow-- ;
   
-  // Если съели кролика, то растем
+  // Р•СЃР»Рё СЃСЉРµР»Рё РєСЂРѕР»РёРєР°, С‚Рѕ СЂР°СЃС‚РµРј
   for (unsigned int i=0; i<rabbits.size(); i++)
     if (rabbits[i].isEqual(head.x,head.y)) {
       grow=3 ;
 	  score+=10 ;
       rabbits.erase(rabbits.begin()+i) ;
-	  // Победили, если съели всех кроликов
+	  // РџРѕР±РµРґРёР»Рё, РµСЃР»Рё СЃСЉРµР»Рё РІСЃРµС… РєСЂРѕР»РёРєРѕРІ
 	  if (rabbits.size()==0) gameover=true ;
       break ;
     }
@@ -193,7 +193,7 @@ void Snake::nextStep(int dtmsec) {
 void Snake::trySetDir(Direction ndir) {
 	Point2 head = body[body.size()-1] ;
 	updateXYCustomDir(ndir,&head.x,&head.y) ;
-	// Можно двигаться только туда, где нет стены и соседней с головы ячейки тела
+	// РњРѕР¶РЅРѕ РґРІРёРіР°С‚СЊСЃСЏ С‚РѕР»СЊРєРѕ С‚СѓРґР°, РіРґРµ РЅРµС‚ СЃС‚РµРЅС‹ Рё СЃРѕСЃРµРґРЅРµР№ СЃ РіРѕР»РѕРІС‹ СЏС‡РµР№РєРё С‚РµР»Р°
 	if ((!body[body.size()-2].isEqual(head.x,head.y))&&(!isWallAt(head.x,head.y))) {
 		stopped=false ;
 		dir=ndir;

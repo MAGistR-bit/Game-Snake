@@ -3,25 +3,25 @@
 #include "glut.h"
 #include "glaux.h"
 
-// Данный файл содержит описание функций движка игры
+// Р”Р°РЅРЅС‹Р№ С„Р°Р№Р» СЃРѕРґРµСЂР¶РёС‚ РѕРїРёСЃР°РЅРёРµ С„СѓРЅРєС†РёР№ РґРІРёР¶РєР° РёРіСЂС‹
 
-// Структура спрайта
+// РЎС‚СЂСѓРєС‚СѓСЂР° СЃРїСЂР°Р№С‚Р°
 struct Sprite {
 	int width ;
 	int height ;
 	GLuint texcode ;
 } ;
 
-// Поворот спрайта
+// РџРѕРІРѕСЂРѕС‚ СЃРїСЂР°Р№С‚Р°
 enum SpriteDir { dLeft, dUp, dRight, dDown } ;
 
-// Загрузка текстур
+// Р—Р°РіСЂСѓР·РєР° С‚РµРєСЃС‚СѓСЂ
 void loadTexture(GLuint * tex, const char * filename) ;
-// Рендер спрайта
+// Р РµРЅРґРµСЂ СЃРїСЂР°Р№С‚Р°
 void renderSprite(const Sprite & spr, int x, int y) ;
-// Рендер спрайта с поворотом
+// Р РµРЅРґРµСЂ СЃРїСЂР°Р№С‚Р° СЃ РїРѕРІРѕСЂРѕС‚РѕРј
 void renderSpriteRotated(const Sprite & spr, int x, int y, SpriteDir dir) ;
-// Рендер чисел (по спрайтам-цифрам)
+// Р РµРЅРґРµСЂ С‡РёСЃРµР» (РїРѕ СЃРїСЂР°Р№С‚Р°Рј-С†РёС„СЂР°Рј)
 void renderDigits(int num, Sprite * digits, int x, int y) ;
-// Рендер времени
+// Р РµРЅРґРµСЂ РІСЂРµРјРµРЅРё
 void renderTimeStr(char * timestr, Sprite * digits, const Sprite & dsep, int x, int y) ;
