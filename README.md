@@ -92,6 +92,15 @@ const int MSEC_UPD = 70;
 
 ![Win](gameInterface/winning.png)
 
+## Помощь с проектом
+<table>
+    <tr>
+        <td>
+            Если Вам понравился данный проект, поставьте ⭐ этому репозиторию.
+        </td>
+    </tr>
+</table>
+
 
 
 
